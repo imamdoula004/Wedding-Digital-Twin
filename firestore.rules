@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Admin access
+    function isAdmin() {
+      return request.auth != null;
+    }
+
+    // RSVPs: Public can create, Admin can read/delete
+    match /rsvps/{rsvpId} {
+      allow create: if request.resource.data.name is string 
+                   && request.resource.data.name.size() > 0
+                   && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Wishes: Public can create, Admin can read/delete
+    match /wishes/{wishId} {
+      allow create: if request.resource.data.name is string
+                   && request.resource.data.message is string
+                   && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Photos: Public can create, Admin can read/delete. Public can read (for collage)
+    match /photos/{photoId} {
+      allow create: if true;
+      allow read: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // Settings: Public can read, Admin can update
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Ceremony Requests: Public can create, Admin can read
+    match /ceremonyRequests/{requestId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

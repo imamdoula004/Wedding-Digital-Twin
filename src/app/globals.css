@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme {
+  --color-wedding-emerald: #022c22;
+  --color-wedding-maroon: #4c0519;
+  --color-wedding-gold: #F9D648;
+  /* Radiant Gold */
+  --color-wedding-gold-dark: #b45309;
+  --color-wedding-gold-text: #846210;
+  --color-wedding-ivory: #fffbeb;
+
+  --font-arabic: var(--font-amiri), serif;
+  --font-cinzel: var(--font-cinzel), serif;
+  --font-playfair: var(--font-playfair), serif;
+  --font-cormorant: var(--font-cormorant), serif;
+
+  --animate-fade-in: fade-in 1s ease-out forwards;
+  --animate-gold-glow: gold-glow 2s infinite alternate;
+  --animate-shimmer: shimmer 3s infinite linear;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes gold-glow {
+    from {
+      text-shadow: 0 0 10px rgba(249, 214, 72, 0.4);
+    }
+
+    to {
+      text-shadow: 0 0 35px rgba(249, 214, 72, 0.9), 0 0 15px rgba(249, 214, 72, 0.5);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}
+
+:root {
+  --background: var(--color-wedding-ivory);
+  --foreground: var(--color-wedding-emerald);
+}
+
+body {
+  background: transparent;
+  color: var(--foreground);
+  overflow-x: hidden;
+  font-family: var(--font-inter);
+}
+
+/* Texture Overlays */
+.silk-texture {
+  position: relative;
+}
+
+.silk-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  opacity: 0.12;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* Custom Utilities for Islamic Backgrounds */
+.islamic-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l5 10 10 5-10 5-5 10-5-10-10-5 10-5 5-10z' fill='%23F9D648' fill-opacity='0.22'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.glass-maroon {
+  background: rgba(76, 5, 25, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-emerald {
+  background: rgba(2, 44, 34, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+.font-cormorant {
+  font-family: var(--font-cormorant);
+}
+
+.font-amiri {
+  font-family: var(--font-arabic);
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel);
+}
+
+.glass-white {
+  background: rgba(255, 255, 250, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(212, 175, 55, 0.05);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-wedding-gold);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-wedding-gold-text);
+}
